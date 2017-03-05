@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>updatetime.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+<body style='width:99%;'>
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				时间管理 <i class="icon-double-angle-right"></i> <small> 修改时间 </small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" id="update"
+					action="${base!}/time/timeupdate.do" method="post" role="form">
+
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">学生选课开始时间</label>
+						<div class="col-sm-9">
+							<input type="date" id="stustarttime" name="stustarttime"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">学生选课结束时间</label>
+						<div class="col-sm-9">
+							<input type="date" ype="text" id="stuendtime"
+								name="stuendtime" class="col-xs-10 col-sm-5" /> <span
+								id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">教师提交论文开始时间</label>
+						<div class="col-sm-9">
+							<input type="date" id="teastarttime" name="teastarttime"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">教师提交论文结束时间</label>
+						<div class="col-sm-9">
+							<input type="datetime" id="teaendtime" name="teaendtime"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div>
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info" id="forSubmit" type="button"
+								onclick="update()">
+								<i class="icon-ok bigger-110"></i> 提交
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="icon-undo bigger-110"></i> 重置
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+		<script type="text/javascript">
+					function update() {
+						if ($("#stustarttime").val() == ""
+								|| $("#stuendtime").val() == ""
+								|| $("#teastarttime").val() == ""
+								|| $("#teaendtime").val() == "") {
+							alert("不能为空!");
+							return false;
+						} else {
+							$("#update").submit();
+						}
+
+					}
+				</script>
+</body>
+</html>

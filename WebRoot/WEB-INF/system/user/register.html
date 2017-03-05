@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>学生注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="http://canyin.zgcimu.com/mobile/themes/default/images/touch-icon.png" rel="apple-touch-icon-precomposed">
+<link href="http://canyin.zgcimu.com/mobile/themes/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="${base}/resource/mobile/ectouch.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${base}/resource/mobile/bom_mobile.js"></script>
+<style>
+dl dd select.inputBg{width:100%;}
+.hd_nav_ul{width: 100%;float: left;height: 35px;line-height: 35px;background: #ddd;}
+.hd_nav_li1{width: 47%;text-align: center;border-right: 1px solid #fff;}
+.hd_nav_li2{width: 47%;text-align: center;}
+.h_dd{width:98%;padding-left:2%;;height: 25px;line-height: 25px;background: #eee;font-family: '微软雅黑'}
+</style></head>
+
+<body>
+
+ 
+<div id="page">
+  <header id="header">
+    <div class="header_l"> <a class="back" href="javascript:history.go(-1)"> 返回 </a> </div>
+    <h1>我要注册 </h1>
+    <div class="header_r">
+    	<a class="ico_05" style="float:left" href="">
+	    	<img alt="" src="${base}/resource/mobile/ico_05.png">主页
+	    </a>
+    </div>
+  </header>
+</div>
+<section class="wrap">
+  <div id="leftTabBox" class="loginBox">
+    <div class="hd">
+      <ul class="hd_nav_ul">
+        <li class="hd_nav_li1" style="background:#8e282d;">
+        	<a style="color:#fff" href="${base!}/user/v_register.do?type=1">学生注册</a>
+        </li>
+        <li class="hd_nav_li2">
+        	<a href="${base!}/user/v_register.do?type=2">老师注册</a>
+        </li>
+      </ul>
+    </div>
+    <div class="bd">
+      <div style="height:55rem">
+      	<div style="width: 100%;" id="stu_info_id"></div>
+        <form action="${base!}/user/v_save.do" method="post" name="formUser" id="register_stu_from">
+          <input name="flag" id="flag" value="register" type="hidden">
+          <div class="table_box">
+            <dl>
+              <dd>
+              	<label style="width:40%;font-size:15px">&nbsp;&nbsp;&nbsp;用户名：</label>
+                <input class="inputBg" name="wechatUserName" id="username" onblur="isUser()" style="width:66%;height:1.8rem " type="text"> <br>
+                <label style="width:66%;padding-left:23%;color:red ">*3-20个以字母开头、可带数字  例:ab1</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">用户密码：</label>
+                <input class="inputBg" name="wehchatUserPass" id="password1" style="width:66%;height:1.8rem " type="password"> <br>
+                <label style="width:66%;padding-left:23%;color:red">*6-15个数字或字母   例:123456</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">重复密码：</label>
+                <input class="inputBg" name="confirm_password" id="confirm_password" style="width:66%;height:1.8rem " type="password"> <br>
+                <label style="width:66%;padding-left:23%; color:red">*确认密码  例:123456</label> 
+              </dd>
+            </dl>
+            <!-- <dl style="padding-bottom: 0rem"><dd class="h_dd">联系人信息</dd></dl> -->
+            <dl>
+              <dd>
+              	<label style="font-size:15px">家长姓名：</label>
+              	<input name="wehchatLinkmanName" id="truename" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              	<label style="width:66%;padding-left:23%;color:red">*联系人家长名字不能为空  例:李某某</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">手机号码：</label>
+              	<input id="mobile_phone" name="wechatPhone" }"="" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              	<label style="width:66%;padding-left:23%; color:red">*手机号码格式要正确   例:15812345678</label>
+              </dd>
+            </dl>
+            <!-- <dl style="padding-bottom: 0rem"><dd class="h_dd">学生信息</dd></dl> -->
+            <dl>
+              <dd>
+              	<label style="font-size:15px">学生姓名：</label>
+              	<input name="wechatStudentName" id="stu_name" }"="" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              	<label style="width:66%;padding-left:23%; color:red">*学生姓名不能为空   例:李某某</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              <label style="font-size:15px">学生学号：</label>
+              <input id="stu_id" name="wechatStudentNum" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              <label style="width:66%;padding-left:23%;color:red">*学生学号选填项  例:2014201</label>
+              </dd>
+            </dl>
+            <dl style="display: none;">
+              <dd>
+              <input id="is_por" name="wechatPoor" onclick="is_AB(this.value)" value="1" style="width:5%;" type="radio"><span width="10%">是贫困生</span>
+              <input id="is_por" name="wechatPoor" value="0" checked="checked" style="width:10%;" type="radio"><span width="10%">非贫困生</span>
+              </dd>
+            </dl>
+            <dl style="padding-top:0">  
+            <dd><label style="font-size:15px">出生日期：</label>
+              <select id="year" onchange="changeday()" name="year" class="" style="padding：0;width:20%;height: 1.8rem;border:1px solid #eee">
+              <option selected="selected" value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option><option value="1969">1969</option><option value="1968">1968</option><option value="1967">1967</option><option value="1966">1966</option><option value="1965">1965</option><option value="1964">1964</option><option value="1963">1963</option><option value="1962">1962</option><option value="1961">1961</option><option value="1960">1960</option><option value="1959">1959</option><option value="1958">1958</option><option value="1957">1957</option><option value="1956">1956</option><option value="1955">1955</option><option value="1954">1954</option><option value="1953">1953</option><option value="1952">1952</option><option value="1951">1951</option><option value="1950">1950</option><option value="1949">1949</option><option value="1948">1948</option><option value="1947">1947</option><option value="1946">1946</option><option value="1945">1945</option><option value="1944">1944</option><option value="1943">1943</option><option value="1942">1942</option><option value="1941">1941</option><option value="1940">1940</option><option value="1939">1939</option><option value="1938">1938</option><option value="1937">1937</option><option value="1936">1936</option></select>
+              <span width="5%">年</span>
+              
+              <select id="month" name="month" onchange="changeday()" class="" style="margin-left:2%;width:15%;height: 1.8rem;border:1px solid #eee">
+              <option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+              <span>月</span>
+              
+              <select select="" id="day" name="day" class="" style="margin-left:2%;width:15%;height: 1.8rem;border:1px solid #eee">
+              <option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+              <span>日</span>
+            </dd>
+            </dl>
+            <dl>
+              <dd>
+              <select id="sex" name="sex" style="height: 1.8rem" class="inputBg">
+              	<option selected="selected" value="-1">请选择性别</option>
+              	<option value="1">男</option>
+              	<option value="2">女</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd> 
+              <select id="area" name="wehchatDistrictId" style="height: 1.8rem" onchange="getSchool()" class="inputBg">
+              	<option selected="selected" value="-1">请选择行政区域</option>
+              	              <#if districtList?exists>
+      								<#if (districtList?size >0)>
+      								<#list districtList as l>
+           							<option value="${l.districtId!}">${l.districtName!}</option>
+      								</#list>
+      								</#if>
+     	 							</#if>
+              	              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd> 
+              <select id="school_id" name="wechatSchoolId" style="height: 1.8rem" onchange="getGarden()" class="inputBg">
+              	<option selected="selected" value="-1">请选择学校</option>
+              	<option selected="selected" value="1">请选择学校</option>
+              	<option selected="selected" value="2">请选择学校</option>
+              	<option selected="selected" value="3">请选择学校</option>
+              	
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd> 
+              <select id="grade_id" name="wechatGardenId" style="height: 1.8rem" onchange="getClass()" class="inputBg">
+              	<option selected="selected" value="-1">请选择年级</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              <select id="classes_id" name="wechatClassId" style="height: 1.8rem" class="inputBg">
+              	<option selected="selected" value="-1">请选择班级</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+                <input id="agreement" name="agreement" value="1" checked="checked" style="vertical-align:middle; zoom:100%;" type="checkbox">
+                <label for="agreement">我已看过并同意《<a href="http://canyin.zgcimu.com/mobile/article.php?cat_id=-1">用户协议</a>》</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<input name="wechatUserType" value="1" type="hidden">
+                <input name="act" value="act_register" type="hidden">
+                <input name="back_act" value="" type="hidden">
+                <input name="Submit" onclick="register()" value="注册" class="c-btn3" type="button">
+              </dd>
+            </dl>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" language="javascript">
+	var curdate = new Date();
+	var year = document.getElementById("year");
+	var month = document.getElementById("month");
+	var day = document.getElementById("day");
+	//绑定年份月分的默认
+	function add() {
+// 		alert($('#year option:selected') .val());
+	    var curyear = curdate.getFullYear();
+	    var minyear = curyear - 80;
+	    var maxyear = curyear - 1;
+		for (maxyear; maxyear >= minyear; maxyear = maxyear - 1) {
+            year.options.add(new Option(maxyear, maxyear));
+        }
+        for (var mindex = 1; mindex <= 12; mindex++) {
+            month.options.add(new Option(mindex, mindex));
+        }
+        for(var dindex=1;dindex<=31;dindex++){
+        	day.options.add(new Option(dindex, dindex));
+        }
+    }
+    //判断是否是闰年
+    function leapyear(intyear) {
+        var result = false;
+        if (((intyear % 400 == 0) && (intyear % 100 != 0)) || (intyear % 4 == 0)) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
+    //绑定天数
+    function addday(maxday) {
+        day.options.length = 0;
+        for (var dindex = 1; dindex <= maxday; dindex++) {
+            day.options.add(new Option(dindex, dindex));
+        }
+    }
+    function changeday() {
+        if (year.value == null || year.value == "") {
+            alert("请先选择年份！");
+            return false;
+        }else {
+            if (month.value == 1 || month.value == 3 || month.value == 5 || month.value == 7 || month.value == 8 || month.value == 10 || month.value == 12) {
+                addday(31);
+        	}else {
+                if (month.value == 4 || month.value == 6 || month.value == 9 || month.value == 11) {
+                    addday(30);
+        		}else {
+                    if (leapyear(year.value)) {
+                        addday(29);
+        			}else {
+                        addday(28);
+                    }
+                }
+            }
+        }
+    }
+    window.onload = add;
+</script> 
+<script type="text/javascript" src="${base}/resource/mobile/jquery-1.js"></script>
+<script type="text/javascript">
+//姓名为2-15个汉字
+function isCardName(s){
+    var patrn = /^\s*[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5.·]{0,15}[\u4e00-\u9fa5]{1,}\s*$/;
+    if(!patrn.exec(s))
+    {
+        return false;
+    }
+    return true;
+} 
+//光标移开验证用户名是否存在
+function isUser(){
+	var username=$("#username").val();
+	if($.trim(username)==''){
+		alert("用户名不能为空!");
+		return false;
+	}else{
+	    if(!isRegisterUserName(username)){
+	      alert("用户名只能输入3-20个以字母开头、可带数字  例:ab1");
+	      return false;
+		}
+	}
+	$.ajax({
+    type: 'POST',
+    url: "${base!}/user/a_check.do" ,
+    dataType: 'json',
+    data: {
+      username:username
+    },
+    success: function(data){
+    	if(data == 1){
+			alert("证件号已存在!");
+			 $("#username").val("");
+			return;
+		}
+    }
+  });
+	
+}
+function isAjax(){
+  var username=$("#username").val();
+  var phone = $("#mobile_phone").val();
+  //var stuid = $("#stu_id").val();
+  if($.trim(username)==''){
+    alert("用户名不能为空!");
+    return false;
+  }else{
+    if(!isRegisterUserName(username)){
+      alert("用户名只能输入3-20个以字母开头、可带数字  例:ab1");
+      return false;
+	}
+  }
+    
+  if($.trim(phone)==''){
+    alert('手机号码不能为空!');
+    return false;
+  }
+  else{
+    if(phone.length<=10){
+      alert("手机号码格式不正确!");
+      return false;
+    }
+    if(!isMobile(phone)){
+      alert("手机号码格式不正确!");
+      return false;
+    }
+  }
+/* if($.trim(stuid)==''){
+    alert('学号不能为空!');
+    return false;
+  }else{
+    if(!isRegisterStuid(stuid)){
+      alert("学生学号只能输入数字  例:201412");
+      return false;
+	}
+  } */
+  
+  $.ajax({
+    type: 'POST',
+    url: "user.php?act=stuAjax" ,
+    dataType: 'json',
+    data: {
+      username:username,
+      phone:phone
+      //,stuid:stuid
+    },
+    success: function(data){
+      var len = (data.msg).length;
+      if (len >0) {
+      alert(data.msg);
+      }
+      else{
+        register();
+      };
+    }
+  });
+}
+function register(){
+	var username=$("#username").val();
+	var password1=$("#password1").val();
+	var password2=$("#confirm_password").val();
+	
+	var truename = $("#truename").val();
+	var phone = $("#mobile_phone").val();
+	var stuname = $("#stu_name").val();
+	//var stuid = $("#stu_id").val();
+	var sex = $("#sex").val();
+	
+	var area = $("#area").val();
+	var school = $("#school_id").val();
+	var grade = $("#grade_id").val();
+	var classes = $("#classes_id").val();
+	var agreement = $("#agreement").val();
+	if($.trim(username)==''){
+		alert("用户名不能为空!");
+		return false;
+	}else{
+		if(!isRegisterUserName(username)){
+			alert("用户名只能输入3-20个以字母开头、可带数字 例:ab1");
+			return false;
+		}
+	}
+	if($.trim(password1)==''||$.trim(password2)==''){
+		alert("登录密码不能为空!");
+		return false;
+	}else{
+		if(!isPasswd(password1)){
+			alert("登录密码只能输入6-15个字母或数字  例:123456");
+			return false;
+		}
+		else{
+			if(password1!=password2){
+				alert("两次输入的密码不一致,请重新输入!");
+				return false;
+			}
+		}
+	}
+	if($.trim(truename)==''){
+		alert('家长姓名不能为空!');
+		return false;
+	}
+	if (!isCardName(truename))
+    {
+        alert("家长姓名为2-8个汉字!");
+        return false;
+    }
+	if($.trim(phone)==''){
+		alert('手机号码不能为空!');
+		return false;
+	}
+	else{
+		if(phone.length<=10){
+			alert("手机号码格式不正确!");
+			return false;
+		}
+		if(!isMobile(phone)){
+			alert("手机号码格式不正确!");
+			return false;
+		}
+	}
+	
+	if($.trim(stuname)==''){
+		alert('学生姓名不能为空!');
+		return false;
+	}else{
+		if (!isCardName(stuname)){
+	        alert("学生姓名为2-8个汉字!");
+	        return false;
+	    }
+	}
+	/* if($.trim(stuid)==''){
+		alert('学号不能为空!');
+		return false;
+	} */
+	if(parseInt(sex)<0){
+		alert('请选择性别!');
+		return false;
+	}
+	if(parseInt(area)<0){
+		alert('请选择市区!');
+		return false;
+	}
+	if(parseInt(school)<0){
+		alert('请选择学校!');
+		return false;
+	}
+	if(parseInt(grade)<0){
+		alert('请选择年级!');
+		return false;
+	}
+	if(parseInt(classes)<0){
+		alert('请选择班级!');
+		return false;
+	}
+	if (!$('#agreement').attr('checked')) {
+		alert('只有同意用户协议的用户才能注册!');
+		return false;
+	}
+  document.getElementById("register_stu_from").submit();    
+}
+//校验登录名：只能输入5-20个以字母开头、可带数字、"_"、"."的字符串
+function isRegisterUserName(s){
+	var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){2,19}$/;
+	if (!patrn.exec(s)) return false;
+	return true;
+}
+//学生学号:只能输入数字  例:201420
+function isRegisterStuid(s){
+	var patrn = /^[0-9]*$/g;
+	if (!patrn.exec(s)) return false;
+	return true;
+}
+//校验密码：只能输入6-20个字母、数字、下划线
+function isPasswd(s){
+	var patrn=/^[0-9a-zA-Z]*$/g;
+	if (!patrn.exec(s)) return false;
+	return true;
+}
+function isMobile(s){
+	var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+	if (!reg.test(s)) {
+		return false;
+	}
+	return true;
+}
+
+var disIds = [<#list districtList as disId>"${disId.districtId!}"<#if disId_has_next>,</#if></#list>];
+var disNames = [<#list districtList as disName>"${disName.districtName!}"<#if disName_has_next>,</#if></#list>];
+
+var schOfDis = [<#list schoolList as disIdOfSch>"${disIdOfSch.districtId!}"<#if disIdOfSch_has_next>,</#if></#list>];
+var schIds = [<#list schoolList as schId>"${schId.schoolId!}"<#if schId_has_next>,</#if></#list>];
+var schNames = [<#list schoolList as schName>"${schName.schoolName!}"<#if schName_has_next>,</#if></#list>];
+
+var gardenIds = [<#list gardenList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+var gardenNames = [<#list gardenList as gardenName>"${gardenName.gardenName!}"<#if gardenName_has_next>,</#if></#list>];
+var gardenOfSchool = [<#list gardenList as schoolId>"${schoolId.schoolId!}"<#if schoolId_has_next>,</#if></#list>];
+
+var classIds = [<#list classList as classId>"${classId.classId!}"<#if classId_has_next>,</#if></#list>];
+var classNames = [<#list classList as className>"${className.className!}"<#if className_has_next>,</#if></#list>];
+var classOfGarden = [<#list classList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+function getSchool(){
+	$("#school_id").empty();
+	$("#grade_id").empty();
+	$("#classes_id").empty();
+	$("#school_id").append("<option value=''>请选择学校</option>");
+	$("#grade_id").append("<option value=''>请选择年级</option>");
+	$("#classes_id").append("<option value=''>请选择班级</option>");
+	for(var i=0;i<schOfDis.length;i++){
+		if(schOfDis[i]==$("#area").val()){
+			$("#school_id").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+		}else if($("#area").val()==""||$("#area").val()==null){
+			$("#school_id").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+		}
+	}
+}
+function getGarden(){
+	$("#grade_id").empty();
+	$("#classes_id").empty();
+	$("#grade_id").append("<option value=''>请选择年级</option>");
+	$("#classes_id").append("<option value=''>请选择班级</option>");
+	for(var i=0;i<gardenOfSchool.length;i++){
+		if(gardenOfSchool[i]==$("#school_id").val()){
+			$("#grade_id").append("<option value="+gardenIds[i]+">"+gardenNames[i]+"</option>");
+		}
+	}
+}
+function getClass(){
+	$("#classes_id").empty();
+	$("#classes_id").append("<option value=''>请选择班级</option>");
+	for(var i=0;i<gardenOfSchool.length;i++){
+		if(classOfGarden[i]==$("#grade_id").val()){
+			$("#classes_id").append("<option value="+classIds[i]+">"+classNames[i]+"</option>");
+		}
+	}
+}
+
+
+</script>
+
+
+</body></html>

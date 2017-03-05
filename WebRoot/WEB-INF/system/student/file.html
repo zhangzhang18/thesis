@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>file.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+<script type="text/javascript">
+	function upload() {
+		$.ajaxFileUpload({
+			url : '${base!}/common/uploadImg.do',
+			secureuri : false,
+			fileElementId : 'uploadFile',
+			dataType : 'json',
+			contentType : 'text/json',
+			success : function(data, status) {
+				alert("上传完成");
+				//window.location="${base}/basicOperation/teacher.do";
+
+			},
+			error : function(data, status, e) {
+				alert(e);
+			}
+		});
+
+	}
+</script>
+<body>
+
+        <input id="uploadFile" name="uploadFile" type="file"  value="导入数据"/>
+        <input name="" type="button" value="上传" onclick="upload()" />
+
+
+
+	<script type="text/javascript">
+		$("#uploadImage").click(function() {
+			uploadimg();
+		})
+		function uploadimg() {
+			$.ajaxFileUpload({
+				url : '${base!}/common/uploadImg.do',
+				secureuri : false,
+				fileElementId : 'uploadFile',
+				dataType : 'json',
+				contentType : 'text/json',
+				success : function(data, status) {
+					$("#imgPrivew").attr("src", data.serverpath);
+					$("#headImg").val(data.serverpath);
+					alert("上传成功！");
+				},
+				error : function(data, status, e) {
+					alert(e);
+				}
+			});
+		}
+		function add() {
+			var form = document.getElementById("bankType")
+			form.submit();
+		}
+	</script>
+</body>
+</html>

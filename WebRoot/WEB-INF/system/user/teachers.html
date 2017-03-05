@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>adminGroup.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/jquery-1.7.2.js"></script>
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/core/zyFile.js"></script>
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/control/js/zyUpload.js"></script>
+<script type="text/javascript" src="${base}/resource/mulUpload/demo.js"></script>
+<script type="text/javascript"
+	src="${base!}/resource/mulUpload/ajaxfileupload.js"></script>
+</head>
+<script type="text/javascript">
+	function upload() {
+		$.ajaxFileUpload({
+			url : '${base!}/teacher/teaup.do',
+			secureuri : false,
+			fileElementId : 'uploadFile',
+			dataType : 'json',
+			contentType : 'text/json',
+			success : function(data, status) {
+				alert("上传完成");
+				//window.location="${base}/basicOperation/teacher.do";
+
+			},
+			error : function(data, status, e) {
+				alert(e);
+			}
+		});
+
+	}
+</script>
+<body style='width:99%;'>
+	<div class="page-content">
+
+		<input id="uploadFile" name="uploadFile" type="file" value="导入数据"
+			class="col-xs-10 col-sm-5" /> <input name="" type="button"
+			value="上传" onclick="upload()" class="btn" /> 
+
+
+		<div class="" align="left">
+			<form method="post" action="${base!}/teachers/sel.do">
+
+				<lable>老师拼音:</lable>
+				<input type="text" name="pinyin"> <input type="submit"
+					value="select">
+			</form>
+		</div>
+		<div align="right">
+			<a href="${base}/teachers/add.do"> <span>添加 </span>
+			</a>
+		</div>
+		<br>
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table id="sample-table-2"
+					class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<td class="center">教师姓名:</td>
+							<td>教师id:</td>
+							<td>拼音:</td>
+							<td>选题人数:</td>
+							<td>选项:</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<#if pagination?exists> <#assign list = pagination.list > <#if
+						list?exists> <#if (list?size >0)> <#list list as l >
+						<tr name="pagination">
+							<td class="center">${l.teaName!}</td>
+							<td>${l.tid!}</td>
+							<td>${l.pinyin!}</td>
+							<td>${l.ssum!}</td>
+							<td>
+								<div
+									class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+									<a class="blue"
+										href="${base!}/teachers/update.do?tid=${l.tid!}"> 编辑 </a> <a
+										class="blue" href="javascript:void(0);"
+										onclick="del(${l.tid!})"> 移除 </a>
+								</div>
+							</td>
+						</tr>
+						</#list> </#if> </#if> <#else> <#if teacher?exists>
+						<tr name="pagination">
+							<td class="center">${teacher.teaName!}</td>
+							<td>${teacher.tid!}</td>
+							<td>${teacher.pinyin!}</td>
+							<td>${teacher.ssum!}</td>
+							<td>
+								<div
+									class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+									<a class="blue" href="${base!}/teachers/update.do?id=${l.tid!}">
+										编辑 </a> <a class="blue" href="javascript:void(0);"
+										onclick="del(${l.tid!})"> 移除 </a>
+								</div>
+							</td>
+						</tr>
+						</#if> </#if>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div style="margin-bottom: auto"><#include
+		"../include/pagination.html" /></div>
+	<script type="text/javascript">
+		function del(tid) {
+			if (!confirm('您确定要删除吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/teacher/deltea.do?tid=" + tid;
+			}
+		}
+	</script>
+</body>
+</html>

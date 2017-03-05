@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+
+</head>
+<body style='width:99%;'>
+	<div class="page-content">
+		<div class="" align="left">
+			<form method="post" action="${base!}/user/sel.do">
+
+				<lable>Stuid:</lable>
+				<input type="text" name="stuid"> <input type="submit"
+					value="select">
+			</form>
+		</div>
+		<br>
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table id="sample-table-2"
+					class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<td class="center">学生姓名:</td>
+							<td>学号:</td>
+							<td>性别:</td>
+							<td>班级:</td>
+							<td>选项:</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<#if pagination?exists> <#assign list = pagination.list > <#if
+						list?exists> <#if (list?size >0)> <#list list as l >
+						<tr name="pagination">
+							<td class="center">${l.stuname!}</td>
+							<td>${l.stuid!}</td>
+							<td>${l.stusex!}</td>
+							<td>${l.stuclass!}</td>
+							<td><#if l.tid?exists>已选<#else>
+								<div>
+									<a class="blue" href="javascript:void(0);"
+										onclick="sel(${l.stuid!})"> 选定 </a>
+								</div> </#if>
+							</td>
+						</tr>
+						</#list></#if></#if> <#else> <#if detail?exists> <#list detail as
+						l >
+						<tr name="pagination">
+							<td class="center">${l.stuname!}</td>
+							<td>${l.stuid!}</td>
+							<td>${l.stupwd!}</td>
+							<td>${l.stusex!}</td>
+							<td>${l.stuclass!}</td>
+							<td>${l.tid!}</td>
+							<td>
+								<div>
+									<a class="blue" href="javascript:void(0);"
+										onclick="sel(${l.stuid!})"> 选定 </a>
+								</div>
+							</td>
+						</tr>
+						</#list></#if> </#if>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div style="margin-bottom: auto"><#include
+		"../include/pagination.html" /></div>
+	<script type="text/javascript">
+		function sel(stuid) {
+			if (!confirm('您确定要指定此学生吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/teacher/stuappoint.do?stuid=" + stuid+"&&cid=${cid}";
+			}
+		}
+	</script>
+</body>
+</html>

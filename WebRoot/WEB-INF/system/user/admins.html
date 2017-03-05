@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+
+</head>
+  <body style='width:99%;'>
+		<div class="page-content">
+	<div class="" align="left">
+		<form method="post" action="${base!}/user/sel.do">
+
+			<lable>Stuid:</lable>
+			<input type="text" name="stuid"> <input type="submit"
+				value="select">
+		</form>
+	</div>
+	<div align="right">
+		<a href="${base}/admin/adduser.do"> <span>添加 </span>
+		</a>
+	</div>
+	<br>
+		<div class="col-xs-12">
+  <div class="table-responsive">
+		<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td class="center">id:</td>
+					<td >登录名:</td>
+					<td >姓名:</td>
+					<td >密码:</td>
+					<td >role-id:</td>
+					<td >选项:</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<#if pagination?exists> 
+				    <#assign list = pagination.list > 
+				     <#if list?exists> 
+				      <#if (list?size >0)> 
+				      <#list list as l >
+				<tr name="pagination">
+					<td class="center">${l.id!}</td>
+					<td>${l.papers!}</td>
+					<td>${l.name!}</td>
+					<td>${l.passWord!}</td>
+					<td>${l.role_id!}</td>
+					<td>
+						<div
+							class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+							<a class="blue"
+								href="${base!}/school/v_edit.do?id=${l.id!}"> 编辑 </a> <a
+								class="blue" href="javascript:void(0);"
+								onclick="del(${l.id!})"> 移除 </a>
+						</div>
+					</td>
+				</tr>
+				</#list> </#if> </#if> </#if>
+			</tbody>
+		</table>
+		
+	</div>
+	</div></div>
+	 <div  style="margin-bottom: auto">
+       			 	<#include "../include/pagination.html" />
+     			 </div>
+     			 <script type="text/javascript">
+		function del(id) {
+			if (!confirm('您确定要退选此吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/student/nothesis.do?id=" + id;
+			}
+		}
+	</script>
+</body>
+</html>

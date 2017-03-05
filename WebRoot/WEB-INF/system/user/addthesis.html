@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+<script src="${base}/resource/hsr/assets/js/jquery-1.8.2.min.js"></script>
+
+</head>
+
+<body style='width:99%;'>
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				论文管理 <i class="icon-double-angle-right"></i> <small> 添加论文</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" id="bankType"
+					action="${base!}/thesis/addthesis.do" method="post" role="form">
+
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">论文id*</label>
+						<div class="col-sm-9">
+							<input type="text" id="nameIs" name="cid"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">论文title*</label>
+						<div class="col-sm-9">
+							<input type="text" id="nameIs" name="ctitle"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">教师id*</label>
+						<div class="col-sm-9">
+							<input type="text" id="nameIs" name="tid"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">是否已选*</label>
+						<div class="col-sm-9">
+							<input type="password" id="nameIs" name="cflag"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">学生id*</label>
+						<div class="col-sm-9">
+							<input type="password" id="nameIs" name="stuid"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div>
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info" id="forSubmit" type="button"
+								onclick="add()">
+								<i class="icon-ok bigger-110"></i> 提交
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="icon-undo bigger-110"></i> 重置
+							</button>
+						</div>
+					</div>
+
+				</form>
+				<script type="text/javascript">
+					function add() {
+						var form = document.getElementById("bankType")
+						form.submit();
+						session.commit();
+					}
+				</script>
+
+
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</body>
+</html>

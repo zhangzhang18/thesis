@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<script src="${base}/resource/hsr/assets/js/jquery-1.8.2.min.js"></script>
+<script src="${base}/resource/js/thesis.js"></script>
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+</head>
+
+<body style='width:99%;'>
+	<div class="page-content">
+		<div class="" align="left">
+			<form method="post" action="${base!}/student/selth.do">
+
+				<lable>title:</lable>
+				<input type="text" name="ctitle"> <input type="submit"
+					value="select">
+			</form>
+		</div>
+
+		<br>
+		<p>${papers}</p>
+		<i></i>
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table id="sample-table-2"
+					class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<td class="center">论文id:</td>
+							<td>论文题目:</td>
+							<td>论文性质:</td>
+							<td>论文类型:</td>
+							<td>研究内容:</td>
+							<td>是否已选:</td>
+							<td>教师:</td>
+							<td>选项:</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<#if pagination?exists> <#assign list = pagination.list > <#if
+						list?exists> <#if (list?size >0)> <#list list as l >
+						<tr name="pagination" id="recommend_${l_index+1}">
+							<td class="center">${l.cid!}</td>
+							<td>${l.ctitle!}</td>
+							<td>${l.cproperty!}</td>
+							<td>${l.ctype!}</td>
+							<td>${l.content!}</td>
+							<td class="flag${l_index+1}"><#if l.cflag==0>未选 <#else>已选
+								</#if></td>
+							<td>${l.teacher.teaName!}</td>
+							<td class="stu_${l_index+1}">${l.stuid!}</td>
+							<td>
+								<div>
+									<#if l.cflag==0><#if u.tid??><#else> <a id="th" class="thesis"
+										href="javascript:void(0);" onclick="sel(${l.cid!})"> 选定 </a>
+									</#if> </#if><a class="nothesis${l_index+1}"
+										href="javascript:void(0);" onclick="del(${l.stuid!})">退选</a>
+
+								</div>
+							</td>
+						</tr>
+						</#list> </#if> </#if> <#else> <#if thesis?exists> <#list thesis
+						as l >
+						<tr name="pagination" id="recommend_${l_index+1}">
+							<td class="center">${l.cid!}</td>
+							<td>${l.ctitle!}</td>
+							<td>${l.cproperty!}</td>
+							<td>${l.ctype!}</td>
+							<td>${l.content!}</td>
+							<td class="flag${l_index+1}">${l.cflag!}</td>
+							<td>${l.teacher.teaName!}</td>
+							<td class="stu_${l_index+1}">${l.stuid!}</td>
+							<td>
+								<div id="chose">
+									<#if l.cflag==0><#if u.tid??><#else><a class="thesis"
+										href="javascript:void(0);" onclick="sel(${l.cid!},${l.flag})">
+										选定 </a></#if> </#if> <a class="nothesis${l_index+1}"
+										href="javascript:void(0);" onclick="del(${l.stuid!})">退选</a>
+
+								</div>
+							</td>
+						</tr>
+						</#list> </#if> </#if>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div style="margin-bottom: auto"><#include
+		"../include/pagination.html" /></div>
+
+	<script type="text/javascript">
+		function sel(cid, flag) {
+			if (!confirm('您确定要选此论文吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/student/selthesis.do?cid=" + cid;
+			}
+		}
+		function del(stuid) {
+			if (!confirm('您确定要退选此论文吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/student/nothesis.do?stuid=" + stuid;
+			}
+		}
+	</script>
+</body>
+</html>

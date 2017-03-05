@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+  		<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+		<script src="${base}/resource/hsr/assets/js/jquery-1.8.2.min.js"></script>
+  </head>
+    <script type="text/javascript">
+    var disIds = [<#list districtList as disId>"${disId.districtId!}"<#if disId_has_next>,</#if></#list>];
+    var disNames = [<#list districtList as disName>"${disName.districtName!}"<#if disName_has_next>,</#if></#list>];
+    
+	var schOfDis = [<#list schoolList as disIdOfSch>"${disIdOfSch.districtId!}"<#if disIdOfSch_has_next>,</#if></#list>];
+	var schIds = [<#list schoolList as schId>"${schId.schoolId!}"<#if schId_has_next>,</#if></#list>];
+	var schNames = [<#list schoolList as schName>"${schName.schoolName!}"<#if schName_has_next>,</#if></#list>];
+	
+	var gardenIds = [<#list gardenList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+	var gardenNames = [<#list gardenList as gardenName>"${gardenName.gardenName!}"<#if gardenName_has_next>,</#if></#list>];
+	var gardenOfSchool = [<#list gardenList as schoolId>"${schoolId.schoolId!}"<#if schoolId_has_next>,</#if></#list>];
+	
+	var classIds = [<#list classList as classId>"${classId.classId!}"<#if classId_has_next>,</#if></#list>];
+	var classNames = [<#list classList as className>"${className.className!}"<#if className_has_next>,</#if></#list>];
+	var classOfGarden = [<#list classList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+    function getSchool(){
+    	$("#schId").empty();
+    	$("#garId").empty();
+    	$("#claId").empty();
+    	$("#schId").append("<option value=''>请选择</option>");
+    	$("#garId").append("<option value=''>请选择</option>");
+    	$("#claId").append("<option value=''>请选择</option>");
+    	for(var i=0;i<schOfDis.length;i++){
+    		if(schOfDis[i]==$("#disId").val()){
+    			$("#schId").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+    		}else if($("#disId").val()==""||$("#disId").val()==null){
+    			$("#schId").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+    		}
+    	}
+    }
+    function getGarden(){
+    	$("#garId").empty();
+    	$("#claId").empty();
+    	$("#garId").append("<option value=''>请选择</option>");
+    	$("#claId").append("<option value=''>请选择</option>");
+    	for(var i=0;i<gardenOfSchool.length;i++){
+    		if(gardenOfSchool[i]==$("#schId").val()){
+    			$("#garId").append("<option value="+gardenIds[i]+">"+gardenNames[i]+"</option>");
+    		}
+    	}
+    }
+    function getClass(){
+    	$("#claId").empty();
+    	$("#claId").append("<option value=''>请选择</option>");
+    	for(var i=0;i<gardenOfSchool.length;i++){
+    		if(classOfGarden[i]==$("#garId").val()){
+    			$("#claId").append("<option value="+classIds[i]+">"+classNames[i]+"</option>");
+    		}
+    	}
+    }
+    </script>
+  <body style='width:99%;height: 100%'>
+		<div class="page-content">
+		<div class="page-header">
+				<h1>
+					<i class="icon-search"></i>用户列表	 &nbsp; 
+								
+				</h1>
+		</div>
+		<div class="row">
+			<div class="row">
+			<div style="margin-left: 10px;">
+			<form name="form2" method="post" action="${base}/user/v_list.do" id="queryUser" style="font-size:12px;">
+	    	
+		        	用户类型
+			        <select name="userType" id="fenlei">
+				        <option value="0"  <#if type=0 >selected="selected" </#if> >学生</option>
+				        <option value="1"  <#if type=1 >selected="selected" </#if>>老师</option>    
+				    </select>
+			    	是否贫困学生
+			        <select name="ispoor" id="fenlei">
+				        <option value="">所有学生</option>
+				        <option value="1">是</option>
+				        <option value="0">否</option> 
+				    </select>
+			    	是否回民
+			        <select name="ishui" id="fenlei">
+				        <option value="">所有人</option>
+				        <option value="1">是</option>
+				        <option value="0">否</option> 
+				    </select>
+				   	 区
+			        <select name="districtId" id="disId" onchange="getSchool()">
+				        <option value="">所有区</option>
+				        <#list districtList as districtList>
+				        <option value="${districtList.districtId!}">${districtList.districtName!}</option>
+				        </#list>
+				    </select>
+				   	 学校
+			        <select name="schoolId" id="schId" onchange="getGarden()">
+				        <option value="">所有学校</option>
+				         <#list schoolList as schoolList>
+				        <option value="${schoolList.schoolId!}">${schoolList.schoolName!}</option>
+				        </#list>
+				    </select>
+				    	 年级
+			        <select name="gardenId" id="garId" onchange="getClass()">
+				        <option value="">所有年级</option>
+				    </select>
+				   	 班级
+			        <select name="classId" id="claId">
+				        <option value="">所有班级</option>
+				    </select>
+		        	 用户名： <input type="text" value="" size="16" name="name">       
+		        	 学生学号： <input type="text" value="" size="16" name="studentNum">       
+		
+	         <input type="submit" value="搜索" size="6" name="search" style="cursor:pointer;">
+	       
+       		</form>
+       		<form name="form2" method="post" action="${base}/goods/buy_list.do" id="form2">
+	    	<table class="tablebg" id="table1">
+	        <tbody>
+		        <tr style="font-size:12px;">
+			        <td >
+				   	 所有年级
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+			         <input type="submit" value="搜索" size="6" name="search" style="cursor:pointer">
+<!-- 			         <a   size="6" href="${base!}/user/v_add.do">添加</a> -->
+<!-- 			         <a   size="6" href="${base!}/user/v_register.do?type=1">注册</a> -->
+			        </td>
+		        </tr>       
+	        </tbody>
+	        </table>
+       		</form>
+       		</div>
+			
+				<div class="col-xs-12">
+						<div class="table-responsive">
+							<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+								 <#if pagination?exists>
+								  	  <#assign userList = pagination.list >
+								      <#if userList?exists>
+								      <#if (userList?size >0)>
+								<thead>
+									<tr>
+										<th class="center">编号</th>
+										<th>用户名</th>
+										<th class="hidden-480">联系人姓名</th>
+										<th>联系人手机</th>
+										<#if type=0>
+										<th>学生姓名</th>
+										<th>学生学号</th>
+										</#if>
+										<th>用户类型</th>
+										<th>是否贫困家庭</th>
+										<th>注册时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									 <#list     userList  as l > 
+									<tr name="pagination">
+										<td class="center" >
+										${l.wechatUserId!}
+										</td>
+										<td>${l.wechatUserName!}</td>
+										<td>${l.wechatLinkmanName!}</td>
+										<td>${l.wechatPhone!}</td>
+										<#if type=0>
+										<td>${l.wechatStudentName!}</td>
+										<td>${l.wechatStudentNum!}</td>
+										</#if>
+										<td><#if l.wechatUserType=0>学生<#else>老师</#if></td>
+										<td><#if l.wechatPoor=0>否<#else>是</#if></td>
+										<td>${l.wechatLogintime?string("yyyy-MM-dd HH:mm:ss")}</td>
+										<td>
+										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+											<a class="blue" href="${base!}/user/v_detail.do?id=${l.wechatUserId!}" >
+											      查看
+											</a>
+											<a class="blue" href="${base!}/user/v_edit.do?id=${l.wechatUserId!}" >
+											      修改
+											</a>
+											<a class="blue" href="javascript:void(0);" onclick="del(${l.wechatUserId!})">
+											      移除
+											</a>
+										</div>
+										</td>
+									</tr>
+									</#list>
+								</tbody>
+								</#if>
+				        		</#if>
+							    </#if>
+							</table>
+						</div>
+				 </div>
+				 <div  style="margin-bottom: auto">
+       			 	<#include "../include/pagination.html" />
+     			 </div>
+			</div>
+		</div>
+	    </div>
+	    <div id="setpage"> </div> 
+	    <script type="text/javascript">
+			function del(id){
+		  		if(!confirm('您确定要删除角色吗?')) {
+					return;
+				}
+				else{
+		  			location.href="${base!}/user/v_del.do?id="+id;
+		  		}
+		 	}
+		</script>
+  </body>
+</html>

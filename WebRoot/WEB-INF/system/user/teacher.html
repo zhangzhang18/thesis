@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>老师注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="http://canyin.zgcimu.com/mobile/themes/default/images/touch-icon.png" rel="apple-touch-icon-precomposed">
+<link href="http://canyin.zgcimu.com/mobile/themes/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="${base}/resource/mobile/ectouch.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="${base}/resource/mobile/bom_mobile.js"></script>
+<style>
+dl dd select.inputBg{width:100%;}
+.hd_nav_ul{width: 100%;float: left;height: 35px;line-height: 35px;background: #ddd;}
+.hd_nav_li1{width: 47%;text-align: center;border-right: 1px solid #fff;}
+.hd_nav_li2{width: 47%;text-align: center;}
+.h_dd{width:98%;padding-left:2%;;height: 25px;line-height: 25px;background: #eee;font-family: '微软雅黑'}
+</style></head>
+
+<body>
+
+ 
+<div id="page">
+  <header id="header">
+    <div class="header_l"> <a class="back" href="javascript:history.go(-1)"> 返回 </a> </div>
+    <h1>我要注册 </h1>
+    <div class="header_r">
+    	<a class="ico_05" style="float:left" href="">
+	    	<img alt="" src="${base}/resource/mobile/ico_05.png">主页
+	    </a>
+    </div>
+  </header>
+</div>
+<section class="wrap">
+  <div id="leftTabBox" class="loginBox">
+    <div class="hd">
+      <ul class="hd_nav_ul">
+        <li class="hd_nav_li1">
+        	<a href="${base!}/user/v_register.do?type=1">学生注册</a>
+        </li>
+        <li class="hd_nav_li2" style="background:#8e282d;">
+        	<a style="color:#fff;" href="${base!}/user/v_register.do?type=2">老师注册</a>
+        </li>
+      </ul>
+    </div>
+    <div class="bd">
+        <div class="table_box">
+            <div style="width: 100%;" id="tch_info_id"></div>
+          <form action="user.php" method="post" name="formUser" id="register_tch_from">
+          <input name="flag" id="flag" value="register" type="hidden">
+          <div class="table_box">
+            <dl>
+              <dd>
+              	<label style="width:40%;font-size:15px">&nbsp;&nbsp;&nbsp;用户名：</label>
+                <input class="inputBg" name="username" id="username" onblur="isTeacherUser()" style="width:66%;height:1.8rem " type="text"> <br>
+                <label style="width:66%;padding-left:23%;color:red ">*3-20个以字母开头、可带数字  例:ab1</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">用户密码：</label>
+                <input class="inputBg" name="password" id="password1" style="width:66%;height:1.8rem " type="password"> <br>
+                <label style="width:66%;padding-left:23%;color:red">*6-15个数字或字母   例:123456</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">重复密码：</label>
+                <input class="inputBg" name="confirm_password" id="confirm_password" style="width:66%;height:1.8rem " type="password"> <br>
+                <label style="width:66%;padding-left:23%; color:red">*确认密码  例:123456</label> 
+              </dd>
+            </dl>
+           <!-- <dl style="padding-bottom: 0rem"><dd class="h_dd">联系人信息</dd></dl> -->
+            <dl>
+              <dd>
+              	<label style="font-size:15px">老师姓名：</label>
+              	<input name="truename" id="truename" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              	<label style="width:66%;padding-left:23%;color:red">*联系人老师名字不能为空   例:李某某</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<label style="font-size:15px">手机号码：</label>
+              	<input id="mobile_phone" name="mobile_phone" class="inputBg" style="width:66%;height:1.8rem " type="text"> <br>
+              	<label style="width:66%;padding-left:23%; color:red">*手机号码格式要正确   例:15812345678</label>
+              </dd>
+            </dl>
+            
+            <dl>
+              <dd> 
+              <select id="area" name="area" style="height: 1.8rem" onchange="getSchools(this.value)" class="inputBg">
+              	<option selected="selected" value="-1">请选择行政区域</option>
+              	              	<option value="1">市直属</option>
+              	              	<option value="2">东安区</option>
+              	              	<option value="3">西安区</option>
+              	              	<option value="4">阳明区</option>
+              	              	<option value="5">爱民区</option>
+              	              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd> 
+              <select id="school_id" name="school" style="height: 1.8rem" onchange="getGrade(this.value)" class="inputBg">
+              	<option selected="selected" value="-1">请选择学校</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd> 
+              <select id="grade_id" name="grade" style="height: 1.8rem" onchange="getClasses(this.value)" class="inputBg">
+              	<option selected="selected" value="-1">请选择年级</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              <select id="classes_id" name="classes" style="height: 1.8rem" class="inputBg">
+              	<option selected="selected" value="-1">请选择班级</option>
+              </select>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+                <input id="agreement" name="agreement" value="1" checked="checked" style="vertical-align:middle; zoom:100%;" type="checkbox">
+                <label for="agreement"> 我已看过并同意《<a href="http://canyin.zgcimu.com/mobile/article.php?cat_id=-1">用户协议</a>》</label>
+              </dd>
+            </dl>
+            <dl>
+              <dd>
+              	<input name="reg_type" value="teacher" type="hidden">
+                <input name="act" value="act_register" type="hidden">
+                <input name="enabled_sms" value="0" type="hidden">
+                <input name="back_act" value="./index.php" type="hidden">
+                <input name="Submit" value="注册" onclick="tchAjax()" class="c-btn3" type="button">
+              </dd>
+            </dl>
+            
+          </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript" src="${base}/resource/mobile/jquery-1.js"></script>
+
+<script type="text/javascript">
+function tchAjax(){
+  var username=$("#username").val();
+  var phone = $("#mobile_phone").val();
+  if($.trim(username)==''){
+    alert("用户名不能为空!");
+    return false;
+  }else{
+    if(!isRegisterUserName(username)){
+      alert("用户名只能输入3-20个以字母开头、可带数字  例:ab1");
+      return false;
+    }
+  }
+  if($.trim(phone)==''){
+    alert('联系人手机号码不能为空!');
+    return false;
+  }
+  else{
+    if(phone.length<=10){
+      alert("联系人手机号码格式不正确  例:15812345678");
+      return false;
+    }
+    if(!isMobile(phone)){
+      alert("联系人手机号码格式不正确  例:15812345678");
+      return false;
+    }
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: "user.php?act=tchAjax" ,
+    dataType: 'json',
+    data: {
+      username:username,
+      phone:phone
+    },
+    success: function(data){
+      var len = (data.msg).length;
+      if (len >0) {
+    	  alert(data.msg);
+      }
+      else{
+        teacher();
+      };
+    }
+  });
+}
+
+//光标移开验证用户名是否存在
+function isTeacherUser(){
+	var username=$("#username").val();
+	if($.trim(username)==''){
+		alert("用户名不能为空!");
+		return false;
+	}else{
+	    if(!isRegisterUserName(username)){
+	      alert("用户名只能输入3-20个以字母开头、可带数字  例:ab1");
+	      return false;
+		}
+	}
+	$.ajax({
+    type: 'POST',
+    url: "user.php?act=isTeacherUserAjax" ,
+    dataType: 'json',
+    data: {
+      username:username
+    },
+    success: function(data){
+      var len = (data.msg).length;
+      if (len >0) {
+     	 alert(data.msg);
+     	 $("#username").val("")
+      }
+    }
+  });
+}
+function teacher(){
+	var username=$("#username").val();
+	var password1=$("#password1").val();
+	var password2=$("#confirm_password").val();
+	var truename = $("#truename").val();
+	var phone = $("#mobile_phone").val();
+	
+	var area = $("#area").val();
+	var school = $("#school_id").val();
+	var grade = $("#grade_id").val();
+	var classes = $("#classes_id").val();
+	var agreement = $("#agreement").val();
+	
+	if($.trim(username)==''){
+		alert("用户名不能为空!");
+		return false;
+	}else{
+		if(!isRegisterUserName(username)){
+			alert("用户名只能输入3-20个以字母开头、可带数字  例:ab1");
+			return false;
+		}
+	}
+	if($.trim(password1)==''||$.trim(password2)==''){
+		alert("登录密码不能为空!");
+		return false;
+	}else{
+		if(!isPasswd(password1)){
+			alert("登录密码只能输入6-15个字母或数字  例:123456");
+			return false;
+		}
+		else{
+			if(password1!=password2){
+				alert("两次输入的密码不一致,请重新输入!");
+				return false;
+			}
+		}
+	}
+	
+	if($.trim(truename)==''){
+		alert('老师姓名不能为空!');
+		return false;
+	}
+	if (!isCardName(truename))
+    {
+        alert("老师姓名为2-8个汉字!");
+        return false;
+    }
+	
+	if($.trim(phone)==''){
+		alert('手机号码不能为空!');
+		return false;
+	}
+	else{
+    if(phone.length<=10){
+      alert("手机号码格式不正确!");
+      return false;
+    }
+		if(!isMobile(phone)){
+			alert("手机号码格式不正确!");
+			return false;
+		}
+	}
+	if(parseInt(area)<0){
+		alert('请选择市区!');
+		return false;
+	}
+	if(parseInt(school)<0){
+		alert('请选择学校!');
+		return false;
+	}
+	if(parseInt(grade)<0){
+		alert('请选择年级!');
+		return false;
+	}
+	if(parseInt(classes)<0){
+		alert('请选择班级!');
+		return false;
+	}
+	if (!$('#agreement').attr('checked')) {
+		alert('只有同意用户协议的用户才能注册!');
+		return false;
+	}
+	document.getElementById("register_tch_from").submit();  
+};
+//校验登录名：只能输入3-20个以字母开头、可带数字、"_"、"."的字符串
+function isRegisterUserName(s){
+	var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){2,19}$/;
+	if (!patrn.exec(s)) return false;
+	return true;
+}
+//校验密码：只能输入6-20个字母、数字、下划线
+function isPasswd(s){
+	var patrn=/^[0-9a-zA-Z]*$/g;
+	if (!patrn.exec(s)) return false;
+	return true;
+}
+//检验老师姓名：姓名是2-15字的汉字
+function isCardName(s)
+{
+    var patrn = /^\s*[\u4e00-\u9fa5]{1,}[\u4e00-\u9fa5.·]{0,15}[\u4e00-\u9fa5]{1,}\s*$/;
+    if(!patrn.exec(s))
+    {
+        return false;
+    }
+    return true;
+} 
+function isMobile(s){
+	var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+	if (!reg.test(s)) {
+		return false;
+	}
+	return true;
+}
+</script>
+
+
+</body></html>

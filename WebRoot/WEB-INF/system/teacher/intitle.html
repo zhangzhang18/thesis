@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>adminGroup.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/jquery-1.7.2.js"></script>
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/core/zyFile.js"></script>
+<script type="text/javascript"
+	src="${base}/resource/mulUpload/control/js/zyUpload.js"></script>
+<script type="text/javascript" src="${base}/resource/mulUpload/demo.js"></script>
+<script type="text/javascript"
+	src="${base!}/resource/mulUpload/ajaxfileupload.js"></script>
+</head>
+<script type="text/javascript">
+	function upload() {
+		$.ajaxFileUpload({
+			url : '${base!}/teacher/teaup.do',
+			secureuri : false,
+			fileElementId : 'uploadFile',
+			dataType : 'json',
+			contentType : 'text/json',
+			success : function(data, status) {
+				alert("上传完成");
+				//window.location="${base}/basicOperation/teacher.do";
+
+			},
+			error : function(data, status, e) {
+				alert(e);
+			}
+		});
+
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('a').click(function() {
+			var link = this.href + '?' + 'fileName=' + $('#fileName').val();
+			window.open(link);
+			return false;
+		});
+	});
+</script>
+<body style='width:99%;'>
+	<div class="page-content">
+
+		<input id="uploadFile" name="uploadFile" type="file" value="导入数据"
+			class="col-xs-10 col-sm-5" /> <input name="" type="button"
+			value="上传" onclick="upload()" class="btn" /> <input id='fileName'
+			type="text" name="fileName" value="thesis.xls" hidden /> <a
+			href="${base!}/teacher/download.do"><button  class="btn" >下载</button></a>
+		<div class="page-header">
+			<h1>
+				教师论文管理 <i class="icon-double-angle-right"></i> <small> 添加论文</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" id="bankType"
+					action="${base!}/teacher/addthesis.do" method="post" role="form">
+
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">论文题目*</label>
+						<div class="col-sm-9">
+							<input type="text" id="nameIs" name="ctitle"
+								class="col-xs-10 col-sm-5" /> <span id="namePrompt"></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">论文类型*</label>
+						<div class="col-sm-9">
+							<select type="text" name="ctype" class="col-xs-10 col-sm-5">
+								<option value="0">论文</option>
+								<option value="1">设计</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">题目性质*</label>
+						<div class="col-sm-9">
+							<select type="text" name="Cproperty" class="col-xs-10 col-sm-5">
+								<option value="0">企事业需求类</option>
+								<option value="1">科学研究类</option>
+								<option value="2">学科前沿综述类</option>
+								<option value="3">工程设计类</option>
+								<option value="4">社会热点类</option>
+								<option value="5">解决社会实际问题类</option>
+								<option value="6">其他类</option>
+							</select>
+						</div>
+					</div>
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">研究内容*</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" name="content"></textarea>
+							<span id="namePrompt"></span>
+						</div>
+					</div>
+
+					<div class="space-4"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="form-field-1">备注*</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" name="Message"></textarea>
+							<span id="namePrompt"></span>
+						</div>
+					</div>
+
+
+					<div class="space-4"></div>
+					<div>
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info" id="forSubmit" type="button"
+								onclick="add()">
+								<i class="icon-ok bigger-110"></i> 提交
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="icon-undo bigger-110"></i> 重置
+							</button>
+						</div>
+					</div>
+
+				</form>
+				<script type="text/javascript">
+					function add() {
+						if ($("input[name=ctitle]").val() == "") {
+							alert("论文题目不能为空!");
+							return false;
+						}
+
+						if ($("input[name=Cproperty]").val() == "") {
+							alert("论文性质不能为空!");
+							return false;
+						}
+						if ($("input[name=ctype]").val() == "") {
+							alert("论文类型不能为空!");
+							return false;
+						}
+						$("#bankType").submit();
+					}
+				</script>
+
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</body>
+</html>

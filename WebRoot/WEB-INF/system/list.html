@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订单页</title>
+
+<link rel="stylesheet" href="${base}/resource/style/index.css" type="text/css" />
+<link rel="stylesheet" href="${base}/resource/style/styles.css" type="text/css" />
+<script type="text/javascript" src="${base}/resource/script/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+						   
+	/* 滑动/展开 */
+	$("ul.expmenu li > div.header").click(function(){
+												   
+		var arrow = $(this).find("span.arrow");
+	
+		if(arrow.hasClass("up")){
+			arrow.removeClass("up");
+			arrow.addClass("down");
+		}else if(arrow.hasClass("down")){
+			arrow.removeClass("down");
+			arrow.addClass("up");
+		}
+	
+		$(this).parent().find("ul.menu").slideToggle();
+		
+	});
+	
+});
+</script>
+<script language="JavaScript">
+<!--//
+function ShowMenu(obj,n){
+ var Nav = obj.parentNode;
+ if(!Nav.id){
+  var BName = Nav.getElementsByTagName("ol");
+  var HName = Nav.getElementsByTagName("h2");
+  var t = 2;
+ }else{
+  var BName = document.getElementById(Nav.id).getElementsByTagName("span");
+  var HName = document.getElementById(Nav.id).getElementsByTagName(".header");
+  var t = 1;
+ }
+ for(var i=0; i<HName.length;i++){
+  HName[i].innerHTML = HName[i].innerHTML.replace("-","+");
+  HName[i].className = "";
+ }
+ obj.className = "h" + t;
+ for(var i=0; i<BName.length; i++){if(i!=n){BName[i].className = "no";}}
+ if(BName[n].className == "no"){
+  BName[n].className = "";
+  obj.innerHTML = obj.innerHTML.replace("+","-");
+ }else{
+  BName[n].className = "no";
+  obj.className = "";
+  obj.innerHTML = obj.innerHTML.replace("-","+");
+ }
+}
+//-->
+</script>
+
+<style>
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div id="head">
+  <div class="head">
+  
+<!--登陆 -->
+    <div class="hy">
+      <span class="one">你好，某某某，欢迎登陆！</span>
+      <span class="one"><img src="${base}/resource/images/coinmm.png" width="30" height="30" /></span>
+      <span><a href="${base!}/welcome/list.do" target="_blank">修改密码</a></span>
+      <span class="one"><img src="${base}/resource/images/cointc.png" width="30" height="30" /></span>
+      <span><a href="${base}/login/logout.do" target="_blank">退出登陆</a></span>
+    </div>
+<!--登陆 -->
+
+<!--导航 -->
+  <ul class="daoh">
+    <li><a href="${base!}/welcome/list.do" >客户</a></li>
+    <li><a href="${base!}/welcome/list.do">联系人</a></li>
+    <li><a href="${base!}/welcome/list.do">日程&任务 </a></li>
+    <li class="one">订单</li>
+    <li><a href="${base!}/welcome/list.do">产品</a></li>
+    <li><a href="${base!}/welcome/list.do">工单</a></li>
+    <li><a href="${base!}/welcome/list.do ">会话记录</a></li>
+    <li><a href="${base!}/welcome/list.do">电话记录</a></li>
+    <li><a href="${base!}/welcome/list.do">留言记录</a></li>
+    <li><a href="${base!}/welcome/list.do">统计分析</a></li>
+    <li><a href="${base!}/welcome/list.do">系统管理</a></li>
+  </ul>
+<!--导航 -->
+
+  </div>
+</div>
+
+
+<div id="center">
+  <div class="grcenter">
+<!-- 左侧 -->  
+    <div class="grcenleft">
+    
+      <div class="ddmes">
+        <input type="button" class="bun" value="新建订单" />
+        <input type="button" class="bun" value="导入订单" />
+      </div>
+      <img src="${base}/resource/images/ddbj.jpg" width="217" height="9" />
+      
+      <div class="sous">
+        <div class="input"><input name="" type="checkbox" value="" /></div>
+        <p class="span">在<全部订单（数据权限内）>中搜索</p>
+        <div class="bh">
+          <span class="span1">订单编号</span>
+          <span class="span2"><img src="${base}/resource/images/down_arrow.gif" width="14" height="13" /></span>
+          <span class="span3"><input name="" type="text" value=""  class="sint3" /></span>
+          <span class="span4">搜索</span>
+        </div>
+      </div>
+    <img src="${base}/resource/images/ddbj.jpg" width="217" height="9" />  
+    <div class="gjss">高级搜索</div>
+    <div class="clear"></div>
+      
+<ul class="expmenu">
+		<li>
+			<div class="header">
+				<span class="label" >数据工具</span>
+				<span class="arrow up"></span>
+			</div>
+			<span class="no">
+			<ul class="menu" style="display:block;">
+
+			<li   onClick="javascript:ShowMenu(this,0)"><a href="${base!}/welcome/list.do"><img src="${base}/resource/images/dhcoin1.png" width="14" height="14" />系统视图</a></li>
+			<ol class="no">
+             <div class="thrli"><li><a href="${base!}/welcome/list.do">全部订单(数据权限内)</a><strong>[<span>0</span>]</strong></li></div>
+             <div class="thrli"><li><a href="${base!}/welcome/list.do">我的订单</a><strong>[<span>0</span>]</strong></li></div>
+             <div class="thrli"><li><a href="${base!}/welcome/list.do">未确认回款的订单</a><strong>[<span>0</span>]</strong></li></div>
+  			</ol>
+            
+
+		</ul>
+		</span>
+		</li>
+        
+	</ul>      
+      
+    </div>
+<!-- 左侧 -->  
+
+<!-- 右侧 -->  
+    <div class="grcenright">
+        <ul class="dqy">
+          <li><img src="${base}/resource/images/dqy1.jpg" width="16" height="15" /></li>
+          <li>当前位置：基础信息录入</li>
+          <li style="float:right;">2014年06月30日   16:18:10    星期一</li>
+        </ul>
+        
+  
+<!-- 全部订单 -->  
+      <div class="nrmk">
+          <div class="nav">
+            <img src="${base}/resource/images/nrmk8.png" width="25" height="25" />
+            <h1>全部订单(数据权限内)</h1>
+            
+          <div class="icn">
+            <img src="${base}/resource/images/liebic1.png" width="19" height="19" /> 
+            <span style="width:30px;">刷新</span>
+            <img src="${base}/resource/images/liebic.png" width="19" height="19" /> 
+            <span>列设置</span>
+            
+            </div>  
+        </div>
+          
+          
+         
+              
+
+      
+          <div class="qbdd" style="height:500px;">
+          
+           <ul class="ddbut">
+             <li>导出</li> 
+             <li>删除</li>
+             <li>分配</li>
+             <li style="width:100px;">下载导入模版</li>          
+           </ul>
+            
+  <div class="biag">
+  <table width="2000" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="bgtop">订单编号</td>
+    <td class="bgtop">所属客户</td>
+    <td class="bgtop">会员账号</td>
+    <td class="bgtop">订单状态</td>
+    <td class="bgtop">付款状态</td>
+    <td class="bgtop">订单金额</td>
+    <td class="bgtop">原始价格</td>
+    <td class="bgtop">价格调整额度</td>
+    <td class="bgtop">价格调整比例(%)</td>
+  </tr>
+  <tr>
+    <td class="bgbh">7984313</td>
+    <td>所属客户</td>
+    <td>会员账号</td>
+    <td>订单状态</td>
+    <td>已付</td>
+    <td>7000</td>
+    <td>9000</td>
+    <td>2000</td>
+    <td>20%</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="33">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+   </table>
+  </div>            
+            
+     <div class="hej">合计项目  <span>0</span></div>   
+     <div class="yem">
+     <span>共</span>
+     <span class="yem_2">21</span>
+     <span>条记录</span>
+     <span>，1/5页</span>
+     <span class="yem_1">1</span>
+     <span class="yem_1">2</span>
+     <span class="yem_1">3</span>
+     <span class="yem_1">4</span>
+     <span class="yem_1">5</span>
+     <span style="padding-left:5px;">到第</span>
+     <span class="yem_1">5</span>
+     <span style="padding:0 10px;">页</span>
+     <span class="yem_3" >前往</span>
+     
+     
+     </div>    
+            
+            
+            
+          </div>
+      </div>
+<!-- 全部订单 -->  
+        
+
+
+
+
+    </div>
+<!-- 右侧 -->  
+
+  
+  </div>
+
+<div style="clear: both;"></div>
+</div>
+
+
+<div class="foot">公司名称 京ICP证060822号</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+  		<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+		<script src="${base}/resource/hsr/assets/js/jquery-1.8.2.min.js"></script>
+
+  </head>
+  
+  <body style='width:99%;'>
+			<div class="page-content">
+				<div class="page-header">
+					<h1>
+						用户管理
+						<i class="icon-double-angle-right"></i>
+						<small>
+							修改用户
+						</small>
+					</h1>
+				</div><!-- /.page-header -->
+				<div class="row">
+					<div class="col-xs-12">
+						<form class="form-horizontal" id="bankType"  action="${base!}/user/v_update.do"  method="post" role="form">
+						<input  type="hidden" name="wechatUserId" value="${fcUser.wechatUserId}">
+						<input type="hidden" name="passWordOri" value="${fcUser.wechatUserPass}">
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户名*</label>
+								<div class="col-sm-9">
+									<input type="text" id="name" name="wechatUserName"  value="${fcUser.wechatUserName}" class="col-xs-10 col-sm-5" />			
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">登录密码*</label>
+								<div class="col-sm-9">
+									<input type="password" id="nameIs" name="wechatUserPass" value="" class="col-xs-10 col-sm-5" />
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">联系人姓名*</label>
+								<div class="col-sm-9">
+									<input type="text" id="nameIs" name="wechatLinkmanName" value="${fcUser.wechatLinkmanName}" class="col-xs-10 col-sm-5" />
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">联系人电话*</label>
+								<div class="col-sm-9">
+									<input type="text" id="nameIs" name="wechatPhone" value="${fcUser.wechatPhone}" class="col-xs-10 col-sm-5" />
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+							<div id="studentName"  >
+							<div class="space-4"></div>
+							<div class="form-group"  >
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">学生姓名*</label>
+								<div class="col-sm-9">
+									<input type="text" id="nameIs" name="wechatStudentName" value="${fcUser.wechatStudentName!}" class="col-xs-10 col-sm-5" />
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">学号*</label>
+								<div class="col-sm-9">
+									<input type="text" id="nameIs" name="wechatStudentNum"  value="${fcUser.wechatStudentNum}" class="col-xs-10 col-sm-5" />
+								<span id="namePrompt"></span>
+								</div>
+							</div>
+						</div>
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">类型*</label>
+								<div class="col-sm-9">
+								<select type="text"  name="wechatUserType" class="col-xs-10 col-sm-5" onchange="changel(this.value)">
+           							<option value="0" <#if  fcUser.wechatUserType==0  >selected="selected"</#if>>学生</option>
+           							<option value="1" <#if  fcUser.wechatUserType==1  >selected="selected" </#if>>老师</option>
+								</select>	
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">区</label>
+								<div class="col-sm-9">
+								<select type="text"  id="area" name="wechatDistrictId" class="col-xs-10 col-sm-5" onchange="getSchool()">
+           							<option value="-1" >请选择行政区域</option>
+				 					<#if districtList?exists>
+									<#if (districtList?size >0)>
+									<#list districtList as l>
+									<option value="${l.districtId!}" <#if  l.districtId=fcUser.wechatDistrictId >  selected="selected"  </#if>>${l.districtName!}</option>
+									</#list>
+									</#if>
+									</#if>	
+								</select>	
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">学校</label>
+								<div class="col-sm-9">
+								<select type="text"  id="school_id" name="wechatSchoolId" class="col-xs-10 col-sm-5" onchange="getGarden()">
+           							<option value="-1">请选择学校</option>
+					              	<#if schoolList?exists>
+									<#if (schoolList?size >0)>
+									<#list schoolList as l>
+									<option value="${l.schoolId!}" <#if  l.schoolId=fcUser.wechatSchoolId >  selected="selected"  </#if>>${l.schoolName!}</option>
+									</#list>
+									</#if>
+									</#if>	
+								</select>	
+								</div>
+							</div>
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">年级</label>
+								<div class="col-sm-9">
+								<select type="text"  id="grade_id" name="wechatGardenId" class="col-xs-10 col-sm-5" onchange="getClass()">
+           							<option value="-1">请选择年级</option>
+					              	<#if gardenList?exists>
+									<#if (gardenList?size >0)>
+									<#list gardenList as l>
+									<option value="${l.gardenId!}" <#if  l.gardenId=fcUser.wechatGardenId >  selected="selected"  </#if>>${l.gardenName!}</option>
+									</#list>
+									</#if>
+									</#if>	
+								</select>	
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">班级</label>
+								<div class="col-sm-9">
+								<select type="text"  id="classes_id" name="wechatClassId" class="col-xs-10 col-sm-5" >
+           							<option value="-1">请选择班级</option>
+					              	<#if classList?exists>
+									<#if (classList?size >0)>
+									<#list classList as l>
+									<option value="${l.classId!}" <#if  l.classId=fcUser.wechatClassId >  selected="selected"  </#if>>${l.className!}</option>
+									</#list>
+									</#if>
+									</#if>
+								</select>	
+								</div>
+							</div>
+							
+							
+							<div class="space-4"></div>
+							<div>
+								<div class="col-md-offset-3 col-md-9">
+									<button class="btn btn-info" id="forSubmit" type="button"onclick="add()" >
+										<i class="icon-ok bigger-110"></i>
+										提交
+									</button>
+									&nbsp; &nbsp; &nbsp;
+									<button class="btn" type="reset">
+										<i class="icon-undo bigger-110"></i>
+										重置
+									</button>
+								</div>
+							</div>
+							
+						</form>
+						<script type="text/javascript">
+		           		function add() {
+			                var form=document.getElementById("bankType")
+                 		 		form.submit();
+                    		}
+		           		function changel(s) {
+			               			if(s==1){
+			               				alert("老师");
+			               				$("#studentName").hide();
+			               			}else{
+// 			               				alert("学生");
+			               				$("#studentName").show();
+			               			}
+			               			
+                    		}
+		           		var disIds = [<#list districtList as disId>"${disId.districtId!}"<#if disId_has_next>,</#if></#list>];
+		           		var disNames = [<#list districtList as disName>"${disName.districtName!}"<#if disName_has_next>,</#if></#list>];
+
+		           		var schOfDis = [<#list schoolList as disIdOfSch>"${disIdOfSch.districtId!}"<#if disIdOfSch_has_next>,</#if></#list>];
+		           		var schIds = [<#list schoolList as schId>"${schId.schoolId!}"<#if schId_has_next>,</#if></#list>];
+		           		var schNames = [<#list schoolList as schName>"${schName.schoolName!}"<#if schName_has_next>,</#if></#list>];
+
+		           		var gardenIds = [<#list gardenList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+		           		var gardenNames = [<#list gardenList as gardenName>"${gardenName.gardenName!}"<#if gardenName_has_next>,</#if></#list>];
+		           		var gardenOfSchool = [<#list gardenList as schoolId>"${schoolId.schoolId!}"<#if schoolId_has_next>,</#if></#list>];
+
+		           		var classIds = [<#list classList as classId>"${classId.classId!}"<#if classId_has_next>,</#if></#list>];
+		           		var classNames = [<#list classList as className>"${className.className!}"<#if className_has_next>,</#if></#list>];
+		           		var classOfGarden = [<#list classList as gardenId>"${gardenId.gardenId!}"<#if gardenId_has_next>,</#if></#list>];
+		           		function getSchool(){
+		           			$("#school_id").empty();
+		           			$("#grade_id").empty();
+		           			$("#classes_id").empty();
+		           			$("#school_id").append("<option value='-1'>请选择学校</option>");
+		           			$("#grade_id").append("<option value='-1'>请选择年级</option>");
+		           			$("#classes_id").append("<option value='-1'>请选择班级</option>");
+		           			for(var i=0;i<schOfDis.length;i++){
+		           				if(schOfDis[i]==$("#area").val()){
+		           					$("#school_id").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+		           				}else if($("#area").val()==""||$("#area").val()==null){
+		           					$("#school_id").append("<option value="+schIds[i]+">"+schNames[i]+"</option>");
+		           				}
+		           			}
+		           		}
+		           		function getGarden(){
+		           			$("#grade_id").empty();
+		           			$("#classes_id").empty();
+		           			$("#grade_id").append("<option value='-1'>请选择年级</option>");
+		           			$("#classes_id").append("<option value='-1'>请选择班级</option>");
+		           			for(var i=0;i<gardenOfSchool.length;i++){
+		           				if(gardenOfSchool[i]==$("#school_id").val()){
+		           					$("#grade_id").append("<option value="+gardenIds[i]+">"+gardenNames[i]+"</option>");
+		           				}
+		           			}
+		           		}
+		           		function getClass(){
+		           			$("#classes_id").empty();
+		           			$("#classes_id").append("<option value='-1'>请选择班级</option>");
+		           			for(var i=0;i<gardenOfSchool.length;i++){
+		           				if(classOfGarden[i]==$("#grade_id").val()){
+		           					$("#classes_id").append("<option value="+classIds[i]+">"+classNames[i]+"</option>");
+		           				}
+		           			}
+		           		}
+		           		
+       					</script>
+						
+						
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
+  </body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+  		<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+
+  </head>
+  
+  <body style='width:99%;'>
+		<div class="page-content">
+		<div class="page-header">
+				<h1>
+					<i class="icon-search"></i>用户列表	 &nbsp; 			
+				</h1>
+		</div>
+		<div class="row">
+			<div class="row">
+			<form name="form2" method="post" action="${base}/goods/buy_list.do" id="form2">
+	    	<table class="tablebg" id="table1">
+	        <tbody>
+		        <tr>
+			        <td>
+		        	用户类型
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+			    	是否贫困学生
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+				   	 区
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+				   	 学校
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+				   	 班级
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+		        	 用户名： <input type="text" value="" size="16" name="name">       
+		        	 学生学号： <input type="text" value="" size="16" name="name">       
+			         <input type="submit" value="搜索" size="6" name="search" style="cursor:pointer">
+			        </td>
+		        </tr>       
+	        </tbody>
+	        </table>
+       		</form>
+			<form name="form2" method="post" action="${base}/goods/buy_list.do" id="form2">
+	    	<table class="tablebg" id="table1">
+	        <tbody>
+		        <tr>
+			        <td>
+				   	 年级
+			        <select name="fenlei" id="fenlei">
+				        <option value="">请选择</option>
+				        <option value="食用产品">食用产品</option>
+				        <option value="美容护肤">美容护肤</option>
+				        <option value="资料">资料</option>        
+				    </select>
+			         <input type="submit" value="搜索" size="6" name="search" style="cursor:pointer">
+			        </td>
+		        </tr>       
+	        </tbody>
+	        </table>
+       		</form>
+				<div class="col-xs-12">
+						<div class="table-responsive">
+							<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th class="center">编号</th>
+										<th>用户名</th>
+										<th class="hidden-480">登陆名</th>
+										<th>创建时间</th>
+										<th>角色</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									  
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									<tr name="pagination">
+										<td class="center" >
+										11111
+										</td>
+										<td>22222</td>
+										<td>33</td>
+										<td>444</td>
+										<td>
+											444444
+										</td>
+										<td>
+											<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="" >
+												      查看
+												</a>
+												<a class="blue" href="${base!}/admin/v_edit.do?id=" >
+												      修改
+												</a>
+												<a class="blue" href="javascript:void(0);" onclick="del()">
+												      移除
+												</a>
+											</div>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+				 </div>
+				 <div  style="margin-bottom: auto">
+       			 	<#include "../include/pagination.html" />
+     			 </div>
+			</div>
+		</div>
+	    </div>
+	    <div id="setpage"> </div> 
+	    <script type="text/javascript">
+			function del(id){
+		  		if(!confirm('您确定要移除购物车的商品吗?')) {
+					return;
+				}
+				else{
+		  			location.href="${base!}/cart/delcartList.do?cartId="+id;
+		  		}
+		 	}
+		</script>
+  </body>
+</html>

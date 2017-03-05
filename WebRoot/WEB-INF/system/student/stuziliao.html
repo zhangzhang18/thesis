@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="${base}/resource/hsr/acedown/assets/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${base}/resource/hsr/acedown/assets/css/ace-skins.min.css" />
+
+</head>
+
+<body style='width:90%;'>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div class="page-content">
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table id="sample-table-2"
+					class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<td class="center">学生姓名:</td>
+							<td>学号:</td>
+							<td>密码:</td>
+							<td>性别:</td>
+							<td>班级:</td>
+							<td>指导教师:</td>
+							<td>已选论文题目:</td>
+							<td>退选:</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr name="pagination">
+							<td class="center">${student.stuname}</td>
+							<td>${student.stuid!}</td>
+							<td>${student.stupwd!}</td>
+							<td>${student.stusex!}</td>
+							<td>${student.stuclass!}</td>
+							<td>${teacher.teaName!}</td>
+							<td>${thesis.ctitle!}</td>
+							<td><#if student.tid??><a class="blue"
+								href="javascript:void(0);" onclick="del(${thesis.stuid!})">退选</a></td>
+							</#if>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<a class="" href="${base!}/student/update.do?stuid=${student.stuid!}">
+			修改 </a>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		function del(stuid) {
+			if (!confirm('您确定要退选此论文吗?')) {
+				return;
+			} else {
+				location.href = "${base!}/student/nothesis.do?stuid=" + stuid;
+			}
+		}
+	</script>
+</body>
+</html>
